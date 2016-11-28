@@ -1,14 +1,17 @@
 package io.swagger.client.api;
 
-import java.math.BigDecimal;
-import java.util.List;
+import io.swagger.client.ApiClient;
 
+import java.math.BigDecimal;
+import io.swagger.client.model.Client;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import feign.*;
-import io.swagger.client.ApiClient;
-import io.swagger.client.model.Client;
 
 
 public interface FakeApi extends ApiClient.Api {

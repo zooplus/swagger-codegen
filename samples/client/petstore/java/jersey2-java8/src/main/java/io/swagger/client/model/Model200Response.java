@@ -26,9 +26,8 @@
 package io.swagger.client.model;
 
 import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -98,6 +97,7 @@ public class Model200Response {
   public int hashCode() {
     return Objects.hash(name, propertyClass);
   }
+
 
   @Override
   public String toString() {

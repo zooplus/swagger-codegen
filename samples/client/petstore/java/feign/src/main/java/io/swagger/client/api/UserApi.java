@@ -1,10 +1,14 @@
 package io.swagger.client.api;
 
-import java.util.List;
-
-import feign.*;
 import io.swagger.client.ApiClient;
+
 import io.swagger.client.model.User;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import feign.*;
 
 
 public interface UserApi extends ApiClient.Api {

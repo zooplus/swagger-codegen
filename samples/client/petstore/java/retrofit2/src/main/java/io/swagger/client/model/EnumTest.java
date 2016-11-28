@@ -26,9 +26,8 @@
 package io.swagger.client.model;
 
 import java.util.Objects;
-
 import com.google.gson.annotations.SerializedName;
-
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -184,6 +183,7 @@ public class EnumTest {
   public int hashCode() {
     return Objects.hash(enumString, enumInteger, enumNumber);
   }
+
 
   @Override
   public String toString() {

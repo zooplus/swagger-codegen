@@ -26,9 +26,8 @@
 package io.swagger.client.model;
 
 import java.util.Objects;
-
 import com.google.gson.annotations.SerializedName;
-
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -87,6 +86,7 @@ public class ReadOnlyFirst {
   public int hashCode() {
     return Objects.hash(bar, baz);
   }
+
 
   @Override
   public String toString() {

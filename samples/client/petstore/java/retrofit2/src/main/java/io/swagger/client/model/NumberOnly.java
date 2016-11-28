@@ -25,12 +25,11 @@
 
 package io.swagger.client.model;
 
-import java.math.BigDecimal;
 import java.util.Objects;
-
 import com.google.gson.annotations.SerializedName;
-
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
 
 /**
  * NumberOnly
@@ -75,6 +74,7 @@ public class NumberOnly {
   public int hashCode() {
     return Objects.hash(justNumber);
   }
+
 
   @Override
   public String toString() {

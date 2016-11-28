@@ -25,13 +25,12 @@
 
 package io.swagger.client.model;
 
-import java.time.OffsetDateTime;
 import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.time.OffsetDateTime;
 
 /**
  * Order
@@ -218,6 +217,7 @@ public class Order {
   public int hashCode() {
     return Objects.hash(id, petId, quantity, shipDate, status, complete);
   }
+
 
   @Override
   public String toString() {

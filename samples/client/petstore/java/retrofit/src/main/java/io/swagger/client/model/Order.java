@@ -26,12 +26,10 @@
 package io.swagger.client.model;
 
 import java.util.Objects;
-
-import org.joda.time.DateTime;
-
 import com.google.gson.annotations.SerializedName;
-
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.joda.time.DateTime;
 
 /**
  * Order
@@ -211,6 +209,7 @@ public class Order {
   public int hashCode() {
     return Objects.hash(id, petId, quantity, shipDate, status, complete);
   }
+
 
   @Override
   public String toString() {

@@ -26,9 +26,8 @@
 package io.swagger.client.model;
 
 import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -124,6 +123,7 @@ public class Name {
   public int hashCode() {
     return Objects.hash(name, snakeCase, property, _123Number);
   }
+
 
   @Override
   public String toString() {

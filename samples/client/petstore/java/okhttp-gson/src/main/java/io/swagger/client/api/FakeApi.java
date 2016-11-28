@@ -25,19 +25,6 @@
 
 package io.swagger.client.api;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.OffsetDateTime;
-
-import com.google.gson.reflect.TypeToken;
-
 import io.swagger.client.ApiCallback;
 import io.swagger.client.ApiClient;
 import io.swagger.client.ApiException;
@@ -46,7 +33,21 @@ import io.swagger.client.Configuration;
 import io.swagger.client.Pair;
 import io.swagger.client.ProgressRequestBody;
 import io.swagger.client.ProgressResponseBody;
+
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+
+import java.math.BigDecimal;
 import io.swagger.client.model.Client;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.OffsetDateTime;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FakeApi {
     private ApiClient apiClient;
@@ -388,13 +389,13 @@ public class FakeApi {
         localVarFormParams.put("enum_query_double", enumQueryDouble);
 
         final String[] localVarAccepts = {
-            "application/json"
+            "*/*"
         };
         final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
 
         final String[] localVarContentTypes = {
-            "application/json"
+            "*/*"
         };
         final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);

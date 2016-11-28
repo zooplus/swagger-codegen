@@ -26,13 +26,11 @@
 package io.swagger.client.model;
 
 import java.util.Objects;
-
-import org.threeten.bp.OffsetDateTime;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.threeten.bp.OffsetDateTime;
 
 /**
  * Order

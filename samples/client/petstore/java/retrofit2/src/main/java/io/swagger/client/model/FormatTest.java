@@ -25,16 +25,14 @@
 
 package io.swagger.client.model;
 
-import java.math.BigDecimal;
 import java.util.Objects;
+import com.google.gson.annotations.SerializedName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
 import java.util.UUID;
-
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
-
-import com.google.gson.annotations.SerializedName;
-
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * FormatTest
@@ -353,6 +351,7 @@ public class FormatTest {
   public int hashCode() {
     return Objects.hash(integer, int32, int64, number, _float, _double, string, _byte, binary, date, dateTime, uuid, password);
   }
+
 
   @Override
   public String toString() {

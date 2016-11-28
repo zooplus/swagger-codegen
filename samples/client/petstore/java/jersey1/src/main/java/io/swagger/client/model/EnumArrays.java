@@ -25,14 +25,13 @@
 
 package io.swagger.client.model;
 
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * EnumArrays
@@ -164,6 +163,7 @@ public class EnumArrays {
   public int hashCode() {
     return Objects.hash(justSymbol, arrayEnum);
   }
+
 
   @Override
   public String toString() {

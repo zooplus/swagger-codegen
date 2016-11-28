@@ -1,15 +1,22 @@
 package io.swagger.client.api;
 
-import java.math.BigDecimal;
-import java.util.List;
+import io.swagger.client.CollectionFormats.*;
 
+
+import retrofit2.Call;
+import retrofit2.http.*;
+
+import okhttp3.RequestBody;
+
+import java.math.BigDecimal;
+import io.swagger.client.model.Client;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
 
-import io.swagger.client.CollectionFormats.*;
-import io.swagger.client.model.Client;
-import retrofit2.Call;
-import retrofit2.http.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public interface FakeApi {
   /**
@@ -19,6 +26,9 @@ public interface FakeApi {
    * @return Call&lt;Client&gt;
    */
   
+  @Headers({
+  	"Content-Type:application/json" 
+  })
   @PATCH("fake")
   Call<Client> testClientModel(
     @retrofit2.http.Body Client body

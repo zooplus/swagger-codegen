@@ -26,9 +26,7 @@
 package io.swagger.client.model;
 
 import java.util.Objects;
-
 import com.google.gson.annotations.SerializedName;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -124,6 +122,7 @@ public class Name {
   public int hashCode() {
     return Objects.hash(name, snakeCase, property, _123Number);
   }
+
 
   @Override
   public String toString() {

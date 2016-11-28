@@ -1,11 +1,19 @@
 package io.swagger.client.api;
 
-import java.util.Map;
-
 import io.swagger.client.CollectionFormats.*;
-import io.swagger.client.model.Order;
-import retrofit2.http.*;
+
 import rx.Observable;
+
+import retrofit2.http.*;
+
+import okhttp3.RequestBody;
+
+import io.swagger.client.model.Order;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public interface StoreApi {
   /**

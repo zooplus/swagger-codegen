@@ -1,21 +1,21 @@
 package io.swagger.client.api;
 
+import io.swagger.client.ApiException;
+import io.swagger.client.ApiClient;
+import io.swagger.client.Configuration;
+import io.swagger.client.Pair;
+
+import javax.ws.rs.core.GenericType;
+
 import java.math.BigDecimal;
+import io.swagger.client.model.Client;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.OffsetDateTime;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.ws.rs.core.GenericType;
-
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.OffsetDateTime;
-
-import io.swagger.client.ApiClient;
-import io.swagger.client.ApiException;
-import io.swagger.client.Configuration;
-import io.swagger.client.Pair;
-import io.swagger.client.model.Client;
 
 
 public class FakeApi {
@@ -215,12 +215,12 @@ if (enumQueryDouble != null)
       localVarFormParams.put("enum_query_double", enumQueryDouble);
 
     final String[] localVarAccepts = {
-      "application/json"
+      "*/*"
     };
     final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
 
     final String[] localVarContentTypes = {
-      "application/json"
+      "*/*"
     };
     final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
