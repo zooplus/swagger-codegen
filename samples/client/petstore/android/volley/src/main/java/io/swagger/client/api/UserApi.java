@@ -35,8 +35,8 @@ import java.util.*;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
-import io.swagger.client.model.User;
 import java.util.*;
+import io.swagger.client.model.User;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
