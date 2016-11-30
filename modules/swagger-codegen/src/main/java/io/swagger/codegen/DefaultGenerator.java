@@ -1,5 +1,6 @@
 package io.swagger.codegen;
 
+import com.google.common.collect.LinkedListMultimap;
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Template;
 import io.swagger.codegen.ignore.CodegenIgnoreProcessor;
@@ -372,6 +373,8 @@ public class DefaultGenerator extends AbstractGenerator implements Generator {
             Json.prettyPrint(allModels);
         }
 
+        String gsonFactoryMethod = modelInheritanceSupportInGson(allModels);
+
         // apis
         Map<String, List<CodegenOperation>> paths = processPaths(swagger.getPaths());
         if(generateApis) {
@@ -495,6 +498,7 @@ public class DefaultGenerator extends AbstractGenerator implements Generator {
         if (swagger.getHost() != null) {
             bundle.put("host", swagger.getHost());
         }
+        bundle.put("gsonFactoryMethod", gsonFactoryMethod);
         bundle.put("swagger", this.swagger);
         bundle.put("basePath", basePath);
         bundle.put("basePathWithoutHost",basePathWithoutHost);
@@ -635,6 +639,37 @@ public class DefaultGenerator extends AbstractGenerator implements Generator {
         }
         config.processSwagger(swagger);
         return files;
+    }
+
+    private String modelInheritanceSupportInGson(List<Object> allModels) {
+        LinkedListMultimap<CodegenModel, CodegenModel> byParent = LinkedListMultimap.create();
+        for (Object m : allModels) {
+            Map entry = (Map) m;
+            CodegenModel parent = ((CodegenModel)entry.get("model")).parentModel;
+            if(null!= parent) {
+                byParent.put(parent, ((CodegenModel)entry.get("model")));
+            }
+        }
+        String gsonFactoryMethod = "";
+        for (CodegenModel k : byParent.keySet()) {
+            List<CodegenModel> children = byParent.get(k);
+            gsonFactoryMethod = gsonFactoryMethod +
+                    "                .registerTypeSelector(" + k.classname + ".class, new TypeSelector() {\n" +
+                    "                    @Override\n" +
+                    "                    public Class getClassForElement(JsonElement readElement) {\n" +
+                    "                        Map classByDiscriminatorValue = new HashMap();\n";
+            for (CodegenModel model : children) {
+                gsonFactoryMethod = gsonFactoryMethod +
+                    "                        classByDiscriminatorValue.put(\"" + model.name + "\", " + model.classname + ".class);\n";
+            }
+            gsonFactoryMethod = gsonFactoryMethod +
+                    "                        String discriminatorField = \"" + k.discriminator + "\";\n" +
+                    "                        String discriminatorValue = readElement.getAsJsonObject().get(discriminatorField).getAsString();\n" +
+                    "                        return (Class) classByDiscriminatorValue.get(discriminatorValue);\n" +
+                    "                    }\n" +
+                    "                })\n" ;
+        }
+        return gsonFactoryMethod;
     }
 
     private File processTemplateToFile(Map<String, Object> templateData, String templateName, String outputFilename) throws IOException {

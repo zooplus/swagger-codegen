@@ -9,7 +9,7 @@
         <version>2.2.1</version>
         <relativePath>../..</relativePath>
     </parent>
-    <artifactId>swagger-codegen-maven-plugin</artifactId>
+    <artifactId>swagger-codegen-maven-plugin-zoo</artifactId>
     <name>swagger-codegen (maven-plugin)</name>
     <packaging>maven-plugin</packaging>
     <description>maven plugin to build modules from swagger codegen</description>
@@ -45,7 +45,7 @@
         </dependency>
         <dependency>
             <groupId>io.swagger</groupId>
-            <artifactId>swagger-codegen</artifactId>
+            <artifactId>swagger-codegen-zoo</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
