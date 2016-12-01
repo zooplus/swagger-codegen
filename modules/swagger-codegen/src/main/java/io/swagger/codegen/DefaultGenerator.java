@@ -660,12 +660,12 @@ public class DefaultGenerator extends AbstractGenerator implements Generator {
                     "                        Map classByDiscriminatorValue = new HashMap();\n";
             for (CodegenModel model : children) {
                 gsonFactoryMethod = gsonFactoryMethod +
-                    "                        classByDiscriminatorValue.put(\"" + model.name + "\", " + model.classname + ".class);\n";
+                    "                        classByDiscriminatorValue.put(\"" + model.name + "\".toUpperCase(), " + model.classname + ".class);\n";
             }
             gsonFactoryMethod = gsonFactoryMethod +
                     "                        String discriminatorField = \"" + k.discriminator + "\";\n" +
                     "                        String discriminatorValue = readElement.getAsJsonObject().get(discriminatorField).getAsString();\n" +
-                    "                        return (Class) classByDiscriminatorValue.get(discriminatorValue);\n" +
+                    "                        return (Class) classByDiscriminatorValue.get(discriminatorValue.toUpperCase());\n" +
                     "                    }\n" +
                     "                })\n" ;
         }
