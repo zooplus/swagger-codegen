@@ -12,6 +12,8 @@ cache:
   - swagger-api/swagger-codegen/samples/client/petstore/objc/core-data/SwaggerClientTests/Pods
   - swagger-api/swagger-codegen/samples/client/petstore/swift/default/SwaggerClientTests/Pods
   - swagger-api/swagger-codegen/samples/client/petstore/swift/promisekit/SwaggerClientTests/Pods
+  - swagger-api/swagger-codegen/samples/client/petstore/swift3/default/SwaggerClientTests/Pods
+  - swagger-api/swagger-codegen/samples/client/petstore/swift3/promisekit/SwaggerClientTests/Pods
 
 services:
   - docker
@@ -38,6 +40,10 @@ before_install:
 install:
 
 script:
+   # test swift3 client with promisekit
+   - cd $SW/samples/client/petstore/swift3/promisekit/SwaggerClientTests && pod install && xcodebuild clean test -workspace "SwaggerClient.xcworkspace" -scheme "SwaggerClient" -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty
+   # test default swift client
+   - cd $SW/samples/client/petstore/swift3/default/SwaggerClientTests && pod install && xcodebuild clean test -workspace "SwaggerClient.xcworkspace" -scheme "SwaggerClient" -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty
    # test default objc client
    - cd $SW/samples/client/petstore/objc/default/SwaggerClientTests && pod install && xctool -workspace "SwaggerClient.xcworkspace" -scheme "SwaggerClient-Example" -destination platform='iOS Simulator',OS=8.4,name='iPhone 6' test -test-sdk iphonesimulator CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
    # test objc client with coredata
