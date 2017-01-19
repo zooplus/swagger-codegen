@@ -125,7 +125,20 @@ public class ApiClient {
 
     public static GsonBuilder createGson() {
         GsonFireBuilder fireBuilder = new GsonFireBuilder()
-        {{{gsonFactoryMethod}}}
+        {{#parent}}
+            .registerTypeSelector({{classname}}.class, new TypeSelector() {
+                @Override
+                public Class getClassForElement(JsonElement readElement) {
+                    Map classByDiscriminatorValue = new HashMap();
+                    {{#children}}
+                    classByDiscriminatorValue.put("{{name}}".toUpperCase(), {{classname}}.class);
+                    {{/children}}
+                    String discriminatorField = "{{discriminator}}";
+                    String discriminatorValue = readElement.getAsJsonObject().get(discriminatorField).getAsString();
+                    return (Class) classByDiscriminatorValue.get(discriminatorValue.toUpperCase());
+                }
+            })
+        {{/parent}}
         ;
         return fireBuilder.createGsonBuilder();
     }
