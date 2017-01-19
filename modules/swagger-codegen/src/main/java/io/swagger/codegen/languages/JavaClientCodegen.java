@@ -1,5 +1,6 @@
 package io.swagger.codegen.languages;
 
+import com.google.common.collect.LinkedListMultimap;
 import io.swagger.codegen.*;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -192,6 +193,25 @@ public class JavaClientCodegen extends AbstractJavaCodegen {
     }
 
     @Override
+    public Map<String, Object> postProcessAllModels(Map<String, Object> objs) {
+        Map<String, Object> allProcessedModels = super.postProcessAllModels(objs);
+        if(!additionalProperties.containsKey("gsonFactoryMethod")) {
+            List<Object> allModels = new ArrayList<Object>();
+            for (String name: allProcessedModels.keySet()) {
+                Map<String, Object> models = (Map<String, Object>)allProcessedModels.get(name);
+                try {
+                    allModels.add(((List<Object>) models.get("models")).get(0));
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+            String gsonFactoryMethod = modelInheritanceSupportInGson(allModels);
+            additionalProperties.put("gsonFactoryMethod", gsonFactoryMethod);
+        }
+        return allProcessedModels;
+    }
+
+    @Override
     public Map<String, Object> postProcessModelsEnum(Map<String, Object> objs) {
         objs = super.postProcessModelsEnum(objs);
         //Needed import for Gson based libraries
@@ -217,4 +237,35 @@ public class JavaClientCodegen extends AbstractJavaCodegen {
         this.useRxJava = useRxJava;
     }
 
+
+    private String modelInheritanceSupportInGson(List<?> allModels) {
+        LinkedListMultimap<CodegenModel, CodegenModel> byParent = LinkedListMultimap.create();
+        for (Object m : allModels) {
+            Map entry = (Map) m;
+            CodegenModel parent = ((CodegenModel)entry.get("model")).parentModel;
+            if(null!= parent) {
+                byParent.put(parent, ((CodegenModel)entry.get("model")));
+            }
+        }
+        String gsonFactoryMethod = "";
+        for (CodegenModel parent : byParent.keySet()) {
+            List<CodegenModel> children = byParent.get(parent);
+            gsonFactoryMethod = gsonFactoryMethod +
+                    "                .registerTypeSelector(" + parent.classname + ".class, new TypeSelector() {\n" +
+                    "                    @Override\n" +
+                    "                    public Class getClassForElement(JsonElement readElement) {\n" +
+                    "                        Map classByDiscriminatorValue = new HashMap();\n";
+            for (CodegenModel model : children) {
+                gsonFactoryMethod = gsonFactoryMethod +
+                        "                        classByDiscriminatorValue.put(\"" + model.name + "\".toUpperCase(), " + model.classname + ".class);\n";
+            }
+            gsonFactoryMethod = gsonFactoryMethod +
+                    "                        String discriminatorField = \"" + parent.discriminator + "\";\n" +
+                    "                        String discriminatorValue = readElement.getAsJsonObject().get(discriminatorField).getAsString();\n" +
+                    "                        return (Class) classByDiscriminatorValue.get(discriminatorValue.toUpperCase());\n" +
+                    "                    }\n" +
+                    "                })\n" ;
+        }
+        return gsonFactoryMethod;
+    }
 }
