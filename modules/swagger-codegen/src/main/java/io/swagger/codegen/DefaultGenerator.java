@@ -637,6 +637,7 @@ public class DefaultGenerator extends AbstractGenerator implements Generator {
         return files;
     }
 
+
     private File processTemplateToFile(Map<String, Object> templateData, String templateName, String outputFilename) throws IOException {
         if(ignoreProcessor.allowsFile(new File(outputFilename.replaceAll("//", "/")))) {
             String templateFile = getFullTemplateFile(config, templateName);

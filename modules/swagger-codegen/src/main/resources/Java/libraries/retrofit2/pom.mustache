@@ -124,6 +124,11 @@
       <artifactId>org.apache.oltu.oauth2.client</artifactId>
       <version>${oltu-version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.gsonfire</groupId>
+      <artifactId>gson-fire</artifactId>
+      <version>${gson-fire-version}</version>
+    </dependency>
     {{^java8}}
     <dependency>
       <groupId>joda-time</groupId>
@@ -159,6 +164,7 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <swagger-core-version>1.5.9</swagger-core-version>
     <retrofit-version>2.1.0</retrofit-version>
+    <gson-fire-version>1.8.0</gson-fire-version>
     {{#useRxJava}}
     <rxjava-version>1.1.6</rxjava-version>
     {{/useRxJava}}
